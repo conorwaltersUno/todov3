@@ -12,4 +12,4 @@ This is a simple TODO application that uses the following tech stack
 
 #### ERD
 
-[![Screenshot-2022-06-07-at-11-28-05.png](https://i.postimg.cc/Pf4by6Qb/Screenshot-2022-06-07-at-11-28-05.png)](https://postimg.cc/CdRfLstd)
+[![Screenshot-2022-06-07-at-13-10-56.png](https://i.postimg.cc/Vk9p9JFZ/Screenshot-2022-06-07-at-13-10-56.png)](https://postimg.cc/pmTsRX4K)

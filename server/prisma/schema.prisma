@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model flyway_schema_history {
+  installed_rank Int      @id(map: "flyway_schema_history_pk")
+  version        String?  @db.VarChar(50)
+  description    String   @db.VarChar(200)
+  type           String   @db.VarChar(20)
+  script         String   @db.VarChar(1000)
+  checksum       Int?
+  installed_by   String   @db.VarChar(100)
+  installed_on   DateTime @default(now()) @db.Timestamp(6)
+  execution_time Int
+  success        Boolean
+
+  @@index([success], map: "flyway_schema_history_s_idx")
+}
+
+model task {
+  id          Int        @id @default(autoincrement())
+  description String     @db.VarChar(255)
+  completed   Boolean
+  todotask    todotask[]
+}
+
+model todo {
+  id          Int        @id @default(autoincrement())
+  header      String     @db.VarChar(255)
+  description String     @db.VarChar(255)
+  createdon   DateTime   @db.Timestamp(6)
+  updatedat   DateTime?  @db.Timestamp(6)
+  todotask    todotask[]
+}
+
+model todotask {
+  id     Int   @id @default(autoincrement())
+  todoid Int?
+  taskid Int?
+  task   task? @relation(fields: [taskid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  todo   todo? @relation(fields: [todoid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
