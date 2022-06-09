@@ -21,7 +21,6 @@ const getTodosService = async () => {
     let todoCompleted = 0;
     let status = "";
     todo.todotask.map((tdt) => {
-      console.log(tdt);
       if (tdt.task.completed) {
         todoCompleted++;
       }

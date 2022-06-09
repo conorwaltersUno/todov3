@@ -12,7 +12,7 @@ const Home = () => {
   const getDataFunction = async () => {
     setIsLoading(true);
     const todoRes = (await instance.get("/todo")).data;
-    console.log(todoRes);
+    setTodos(todoRes.todos);
     setIsLoading(false);
   };
 
