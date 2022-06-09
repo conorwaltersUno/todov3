@@ -46,7 +46,7 @@ const deleteTodo = async (req, res) => {
   if (!deletedTodo || deletedTodo.length === 0) return res.sendStatus(500);
 
   res.status(okStatus).json({
-    message: `Successfully deleted boat with id: ${req.params.id}`,
+    message: `Successfully deleted todo with id: ${req.params.id}`,
   });
 };
 

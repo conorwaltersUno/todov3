@@ -4,8 +4,12 @@ const { postTask, deleteTask, updateTask } = require("../controllers/task");
 const { validator } = require("../middleware/expressValidator");
 const { body, param } = require("express-validator");
 
-router.route("/").post(
+router.route("/:id").post(
   [
+    param("id")
+      .exists()
+      .isNumeric()
+      .withMessage("Id parameter must be a numeric value"),
     body("description")
       .exists()
       .notEmpty()

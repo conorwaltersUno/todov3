@@ -1,7 +1,21 @@
 const prisma = require("../utils/primsa");
 
 const getTodosService = async () => {
-  return await prisma.todo.findMany();
+  return await prisma.todo.findMany({
+    include: {
+      todotask: {
+        select: {
+          task: {
+            select: {
+              id: true,
+              description: true,
+              completed: true,
+            },
+          },
+        },
+      },
+    },
+  });
 };
 
 const getTodoByIdService = async (id) => {
