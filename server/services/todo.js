@@ -1,7 +1,7 @@
 const prisma = require("../utils/primsa");
 
 const getTodosService = async () => {
-  return await prisma.todo.findMany({
+  const todos = await prisma.todo.findMany({
     include: {
       todotask: {
         select: {
@@ -16,6 +16,26 @@ const getTodosService = async () => {
       },
     },
   });
+  todos.map((todo) => {
+    let todoLength = todo.todotask.length;
+    let todoCompleted = 0;
+    let status = "";
+    todo.todotask.map((tdt) => {
+      console.log(tdt);
+      if (tdt.task.completed) {
+        todoCompleted++;
+      }
+    });
+    if (todoCompleted === todoLength) {
+      status = "Complete";
+    } else if (todoCompleted != todoLength && todoCompleted > 0) {
+      status = "In Progress";
+    } else {
+      status = "Backlog";
+    }
+    todo.status = status;
+  });
+  return todos;
 };
 
 const getTodoByIdService = async (id) => {

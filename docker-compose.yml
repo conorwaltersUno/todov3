@@ -1,11 +1,11 @@
 version: "3"
 services:
-  ui:
-    build: ./frontend
-    ports:
-      - 80:80
-    depends_on:
-      - api
+  # ui:
+  #   build: ./frontend
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - api
   api:
     build: ./server
     ports:
