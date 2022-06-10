@@ -23,3 +23,7 @@ code {
 .loading-container {
   display: flex;
 }
+
+.card-container {
+  margin: 10px;
+}
