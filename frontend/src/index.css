@@ -19,3 +19,7 @@ code {
   flex-flow: center;
   margin-top: 3em;
 }
+
+.loading-container {
+  display: flex;
+}

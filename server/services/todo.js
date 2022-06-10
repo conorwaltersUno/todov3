@@ -25,7 +25,7 @@ const getTodosService = async () => {
         todoCompleted++;
       }
     });
-    if (todoCompleted === todoLength) {
+    if (todoCompleted === todoLength && todoLength > 0) {
       status = "Complete";
     } else if (todoCompleted != todoLength && todoCompleted > 0) {
       status = "In Progress";
