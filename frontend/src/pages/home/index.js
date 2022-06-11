@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Button, Grid, IconButton } from "@material-ui/core";
+import { Collapse, Grid, IconButton } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -58,7 +58,9 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Item>
-            In Progress
+            <div style={{ marginTop: "26px", marginBottom: "29px" }}>
+              In Progress
+            </div>
             {data.todos.map((todo) => (
               <TodoInProgress todo={todo} />
             ))}
@@ -66,7 +68,9 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Item>
-            Completed
+            <div style={{ marginTop: "26px", marginBottom: "29px" }}>
+              Completed
+            </div>
             {data.todos.map((todo) => (
               <TodoComplete todo={todo} />
             ))}

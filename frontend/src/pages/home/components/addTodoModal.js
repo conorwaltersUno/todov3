@@ -16,6 +16,7 @@ const AddTodoModal = ({ open, handleClose }) => {
   const queryClient = useQueryClient();
   const style = {
     position: "absolute",
+    marginTop: "40px",
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -62,42 +63,46 @@ const AddTodoModal = ({ open, handleClose }) => {
       >
         <Box sx={style}>
           <form onSubmit={onSubmit}>
-            <TextField
-              id="header"
-              label="Title"
-              type="text"
-              inputProps={{
-                minLength: 5,
-                maxLength: 160,
-              }}
-              sx={{ mt: 1 }}
-              fullWidth
-              required
-              onChange={onChange}
-              value={formState.header}
-            />
-            <TextField
-              id="description"
-              label="Description"
-              type="text"
-              inputProps={{
-                minLength: 5,
-                maxLength: 160,
-              }}
-              sx={{ mt: 1 }}
-              fullWidth
-              required
-              onChange={onChange}
-              value={formState.description}
-            />
-            <LoadingButton
-              variant="contained"
-              fullWidth
-              type="submit"
-              loading={isLoading}
-            >
-              Save
-            </LoadingButton>
+            <div className="add-modal-container">
+              <h3>Add a new todo</h3>
+              <TextField
+                id="header"
+                label="Title"
+                type="text"
+                inputProps={{
+                  minLength: 5,
+                  maxLength: 160,
+                }}
+                sx={{ mt: 1 }}
+                fullWidth
+                required
+                onChange={onChange}
+                value={formState.header}
+              />
+              <TextField
+                id="description"
+                label="Description"
+                type="text"
+                inputProps={{
+                  minLength: 5,
+                  maxLength: 160,
+                }}
+                sx={{ mt: 1 }}
+                fullWidth
+                required
+                onChange={onChange}
+                value={formState.description}
+              />
+              <LoadingButton
+                style={{ marginTop: "25px" }}
+                variant="contained"
+                fullWidth
+                type="submit"
+                loading={isLoading}
+              >
+                Save
+              </LoadingButton>
+            </div>
           </form>
         </Box>
       </Modal>
