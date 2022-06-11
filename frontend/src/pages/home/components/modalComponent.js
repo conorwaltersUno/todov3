@@ -13,7 +13,7 @@ const ModalComponent = ({
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 700,
+    width: "70%",
     bgcolor: "#fff",
     border: "2px solid #000",
     boxShadow: 24,

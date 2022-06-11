@@ -12,24 +12,18 @@ const AddTodoModal = ({ open, handleClose }) => {
   };
   const [formState, setFormState] = useState(initialState);
   const [isLoading, setisLoading] = useState(false);
+  const resetFormState = () => setFormState({ ...initialState });
   const queryClient = useQueryClient();
   const style = {
     position: "absolute",
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 700,
+    width: "70%",
     bgcolor: "#fff",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
-  };
-
-  const resetFormState = () => setFormState({ ...initialState });
-
-  const onDialogClose = () => {
-    handleClose();
-    resetFormState();
   };
 
   const onChange = (e) => {

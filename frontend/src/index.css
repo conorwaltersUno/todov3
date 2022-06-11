@@ -32,3 +32,9 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.backlog-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

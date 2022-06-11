@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, IconButton } from "@material-ui/core";
+import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Loading from "../../components/loading";
@@ -9,6 +10,7 @@ import TodoBacklog from "./components/todoBacklog";
 import TodoInProgress from "./components/todoInProgress";
 import TodoComplete from "./components/todoComplete";
 import AddTodoModal from "./components/addTodoModal";
+import { flexbox } from "@mui/system";
 
 const Home = () => {
   const [isOpen, setisOpen] = useState(false);
@@ -32,18 +34,29 @@ const Home = () => {
   if (error) return "An error has occurred: " + error.message;
   return (
     <div>
-      <Button onClick={handleOpen}>Add a new Todo</Button>
       <AddTodoModal open={isOpen} handleClose={handleClose} />
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4} md={4}>
           <Item>
-            Backlog
+            <div className="backlog-title-container">
+              <div>Backlog</div>
+              <IconButton
+                color="primary"
+                onClick={handleOpen}
+                aria-label="upload picture"
+                component="span"
+              >
+                <div style={{ marginTop: "8px" }}>
+                  <AddIcon />
+                </div>
+              </IconButton>
+            </div>
             {data.todos.map((todo) => (
               <TodoBacklog todo={todo} />
             ))}
           </Item>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4} md={4}>
           <Item>
             In Progress
             {data.todos.map((todo) => (
@@ -51,7 +64,7 @@ const Home = () => {
             ))}
           </Item>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4} md={4}>
           <Item>
             Completed
             {data.todos.map((todo) => (
