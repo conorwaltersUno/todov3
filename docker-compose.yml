@@ -9,7 +9,7 @@ services:
   api:
     build: ./server
     ports:
-      - 3001:3001
+      - 3010:3010
     environment:
       DATABASE_URL: "postgresql://user:password@db:5432/conor?schema=public"
     depends_on:

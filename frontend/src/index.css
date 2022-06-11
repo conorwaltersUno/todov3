@@ -27,3 +27,8 @@ code {
 .card-container {
   margin: 10px;
 }
+
+.task-single-container {
+  display: flex;
+  justify-content: center;
+}

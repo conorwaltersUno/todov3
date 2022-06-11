@@ -1,15 +1,19 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-
 import Loading from "../../components/loading";
 import baseUrl from "../../utils/baseUrl";
 import TodoBacklog from "./components/todoBacklog";
 import TodoInProgress from "./components/todoInProgress";
 import TodoComplete from "./components/todoComplete";
+import AddTodoModal from "./components/addTodoModal";
 
 const Home = () => {
+  const [isOpen, setisOpen] = useState(false);
+  const handleClose = () => setisOpen(false);
+  const handleOpen = () => setisOpen(true);
   const { isLoading, error, data } = useQuery("todoData", () =>
     fetch(baseUrl + "/todo").then((res) => res.json())
   );
@@ -28,6 +32,8 @@ const Home = () => {
   if (error) return "An error has occurred: " + error.message;
   return (
     <div>
+      <Button onClick={handleOpen}>Add a new Todo</Button>
+      <AddTodoModal open={isOpen} handleClose={handleClose} />
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Item>

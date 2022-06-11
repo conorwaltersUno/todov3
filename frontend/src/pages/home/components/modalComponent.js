@@ -1,6 +1,7 @@
 import { Button, Modal, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
 import React from "react";
+import TaskDisplay from "./taskDisplay";
 
 const ModalComponent = ({
   open,
@@ -13,7 +14,7 @@ const ModalComponent = ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 700,
-    bgcolor: "background.paper",
+    bgcolor: "#fff",
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
@@ -33,6 +34,7 @@ const ModalComponent = ({
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography>
+          <TaskDisplay tasks={todotask}></TaskDisplay>
         </Box>
       </Modal>
     </div>
