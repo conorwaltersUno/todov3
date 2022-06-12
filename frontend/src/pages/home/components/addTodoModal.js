@@ -43,7 +43,7 @@ const AddTodoModal = ({ open, handleClose }) => {
     e.preventDefault();
     setisLoading(true);
     const status = await postTodo(formState);
-    if (status == 200) {
+    if (status === 200) {
       queryClient.refetchQueries("todoData");
       setisLoading(false);
       handleClose();

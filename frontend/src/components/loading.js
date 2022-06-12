@@ -4,7 +4,7 @@ import loadingGif from "../assets/loadingGif.gif";
 const Loading = () => {
   return (
     <div className="loading-container">
-      <img src={loadingGif}></img>
+      <img src={loadingGif} alt="Loading..."></img>
     </div>
   );
 };

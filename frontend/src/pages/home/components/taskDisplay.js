@@ -1,7 +1,6 @@
 import React from "react";
 
 const TaskDisplay = ({ tasks }) => {
-  console.log(tasks);
   return (
     <div>
       {tasks.map((task) => {

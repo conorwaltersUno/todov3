@@ -1,6 +1,6 @@
-import { Card, Typography, CardContent, Modal, Box } from "@material-ui/core";
+import { Card, Typography, CardContent } from "@material-ui/core";
 import React from "react";
-import ModalComponent from "./modalComponent";
+import TodoModal from "./todoModal";
 
 const TodoCard = ({ todo }) => {
   const [open, setOpen] = React.useState(false);
@@ -17,13 +17,13 @@ const TodoCard = ({ todo }) => {
           <Typography variant="body2">{todo.description}</Typography>
         </CardContent>
       </Card>
-      <ModalComponent
+      <TodoModal
         open={open}
         todo={todo}
         handleClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-      ></ModalComponent>
+      ></TodoModal>
     </div>
   );
 };

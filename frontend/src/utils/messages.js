@@ -1,3 +1,26 @@
+import React from "react";
+import toast from "react-hot-toast";
+import styled from "styled-components";
+
+const ToastContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ToastIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 20px;
+  min-height: 20px;
+`;
+
+const ToastContentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+`;
+
 const renderToastComponent = (content, icon, duration) => {
   toast(
     (t) => (
@@ -14,21 +37,17 @@ const renderToastComponent = (content, icon, duration) => {
     ),
     {
       position: "top-center",
-      duration,
+      duration: duration,
       style: { width: "600px", maxWidth: "600px" },
     }
   );
 };
 
 export const clientErrorMessage = (msg) => {
-  const content =
-    res === null ? (
-      msg
-    ) : (
-      <span>
-        {msg}
-        <br></br> <pre>{safeToString(res)}</pre>
-      </span>
-    );
+  const content = <span>{msg}</span>;
   renderToastComponent(content, "❌", 600000);
+};
+
+export const successMessage = (msg) => {
+  renderToastComponent(msg, "✅", 5000);
 };

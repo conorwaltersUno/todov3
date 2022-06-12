@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { Collapse, Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import AddIcon from "@mui/icons-material/Add";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -10,7 +10,6 @@ import TodoBacklog from "./components/todoBacklog";
 import TodoInProgress from "./components/todoInProgress";
 import TodoComplete from "./components/todoComplete";
 import AddTodoModal from "./components/addTodoModal";
-import { flexbox } from "@mui/system";
 
 const Home = () => {
   const [isOpen, setisOpen] = useState(false);

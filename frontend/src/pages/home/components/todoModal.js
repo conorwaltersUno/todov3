@@ -1,9 +1,10 @@
-import { Button, Modal, Typography } from "@material-ui/core";
+import { Modal, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
 import React from "react";
+import AddTask from "./addTask";
 import TaskDisplay from "./taskDisplay";
 
-const ModalComponent = ({
+const TodoModal = ({
   open,
   handleClose,
   todo: { id, header, description, todotask },
@@ -13,6 +14,7 @@ const ModalComponent = ({
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+    marginTop: "140px",
     width: "70%",
     bgcolor: "#fff",
     border: "2px solid #000",
@@ -34,6 +36,7 @@ const ModalComponent = ({
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {description}
           </Typography>
+          <AddTask todoId={id}></AddTask>
           <TaskDisplay tasks={todotask}></TaskDisplay>
         </Box>
       </Modal>
@@ -41,4 +44,4 @@ const ModalComponent = ({
   );
 };
 
-export default ModalComponent;
+export default TodoModal;
