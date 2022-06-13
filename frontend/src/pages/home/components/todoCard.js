@@ -19,6 +19,7 @@ const TodoCard = ({ todo }) => {
       </Card>
       <TodoModal
         open={open}
+        setOpen={setOpen}
         todo={todo}
         handleClose={handleClose}
         aria-labelledby="modal-modal-title"

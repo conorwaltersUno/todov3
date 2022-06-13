@@ -25,7 +25,6 @@ const Home = () => {
     padding: theme.spacing(1),
     textAlign: "center",
     height: "100%",
-    color: theme.palette.text.secondary,
   }));
 
   if (isLoading) return <Loading></Loading>;

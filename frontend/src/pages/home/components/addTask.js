@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
 import { TextField } from "@material-ui/core";
 import { LoadingButton } from "@mui/lab";
-
-import { postTask } from "../../../connectors/task";
-import { successMessage } from "../../../utils/messages";
+import { useMutation, useQueryClient } from "react-query";
+import instance from "../../../utils/axios";
 
 const AddTask = ({ todoId }) => {
   const initialState = {
@@ -13,7 +11,7 @@ const AddTask = ({ todoId }) => {
   const [formState, setFormState] = useState(initialState);
   const [isLoading, setisLoading] = useState(false);
   const resetFormState = () => setFormState({ ...initialState });
-
+  const queryClient = useQueryClient();
   const onChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -26,17 +24,34 @@ const AddTask = ({ todoId }) => {
     setFormState(newFormState);
   };
 
+  const mutation = useMutation((newTask) => {
+    return instance.post(`/task/${todoId}`, newTask);
+  });
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setisLoading(true);
-    const { status } = await postTask(formState.description, todoId);
-    if (status === 200) {
-      resetFormState();
-      setisLoading(false);
-      successMessage("Successfully added new task!");
-    } else {
-      setisLoading(false);
-    }
+    mutation.mutate(
+      {
+        description: formState.description,
+        completed: false,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries("todoData");
+          queryClient.refetchQueries("todoData");
+          setisLoading(true);
+          alert("Successfully added todo");
+        },
+      },
+      {
+        isError: () => {
+          setisLoading(false);
+          alert(mutation.error);
+        },
+      }
+    );
+    resetFormState();
   };
 
   return (
@@ -57,6 +72,9 @@ const AddTask = ({ todoId }) => {
           onChange={onChange}
           value={formState.description}
         />
+        {mutation.error && (
+          <h5 onClick={() => mutation.reset()}>{mutation.error}</h5>
+        )}
 
         <LoadingButton
           style={{ marginTop: "25px" }}
