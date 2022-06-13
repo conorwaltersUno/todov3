@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import AddTask from "./addTask";
 import TaskDisplay from "./taskDisplay";
+import Fade from "@mui/material/Fade";
 
 const TodoModal = ({
   open,
@@ -29,16 +30,18 @@ const TodoModal = ({
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {id}.{header}
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {description}
-          </Typography>
-          <AddTask todoId={id}></AddTask>
-          <TaskDisplay tasks={todotask}></TaskDisplay>
-        </Box>
+        <Fade in={open}>
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {id}.{header}
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              {description}
+            </Typography>
+            <AddTask todoId={id}></AddTask>
+            <TaskDisplay tasks={todotask}></TaskDisplay>
+          </Box>
+        </Fade>
       </Modal>
     </div>
   );

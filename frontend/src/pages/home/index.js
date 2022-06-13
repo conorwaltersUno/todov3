@@ -20,20 +20,25 @@ const Home = () => {
   );
 
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    backgroundColor: "#AD8A64",
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
-    height: "100%",
   }));
 
   if (isLoading) return <Loading></Loading>;
 
   if (error) return "An error has occurred: " + error.message;
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: "#BF8B85",
+        minHeight: "100vh",
+        position: "inherit",
+      }}
+    >
       <AddTodoModal open={isOpen} handleClose={handleClose} />
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{ margin: "-2px" }}>
         <Grid item xs={12} sm={4} md={4}>
           <Item>
             <div className="backlog-title-container">
@@ -65,7 +70,7 @@ const Home = () => {
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
-          <Item>
+          <Item style={{ marginRight: "12px" }}>
             <div style={{ marginTop: "26px", marginBottom: "29px" }}>
               Completed
             </div>

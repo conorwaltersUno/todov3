@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { postTodo } from "../../../connectors/todo";
+import Fade from "@mui/material/Fade";
 
 const AddTodoModal = ({ open, handleClose }) => {
   const initialState = {
@@ -61,50 +62,52 @@ const AddTodoModal = ({ open, handleClose }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <form onSubmit={onSubmit}>
-            <div className="add-modal-container">
-              <h3>Add a new todo</h3>
-              <TextField
-                id="header"
-                label="Title"
-                type="text"
-                inputProps={{
-                  minLength: 5,
-                  maxLength: 160,
-                }}
-                sx={{ mt: 1 }}
-                fullWidth
-                required
-                onChange={onChange}
-                value={formState.header}
-              />
-              <TextField
-                id="description"
-                label="Description"
-                type="text"
-                inputProps={{
-                  minLength: 5,
-                  maxLength: 160,
-                }}
-                sx={{ mt: 1 }}
-                fullWidth
-                required
-                onChange={onChange}
-                value={formState.description}
-              />
-              <LoadingButton
-                style={{ marginTop: "25px" }}
-                variant="contained"
-                fullWidth
-                type="submit"
-                loading={isLoading}
-              >
-                Save
-              </LoadingButton>
-            </div>
-          </form>
-        </Box>
+        <Fade in={open}>
+          <Box sx={style}>
+            <form onSubmit={onSubmit}>
+              <div className="add-modal-container">
+                <h3>Add a new todo</h3>
+                <TextField
+                  id="header"
+                  label="Title"
+                  type="text"
+                  inputProps={{
+                    minLength: 5,
+                    maxLength: 160,
+                  }}
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  required
+                  onChange={onChange}
+                  value={formState.header}
+                />
+                <TextField
+                  id="description"
+                  label="Description"
+                  type="text"
+                  inputProps={{
+                    minLength: 5,
+                    maxLength: 160,
+                  }}
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  required
+                  onChange={onChange}
+                  value={formState.description}
+                />
+                <LoadingButton
+                  style={{ marginTop: "25px" }}
+                  variant="contained"
+                  fullWidth
+                  type="submit"
+                  loading={isLoading}
+                >
+                  Save
+                </LoadingButton>
+              </div>
+            </form>
+          </Box>
+        </Fade>
       </Modal>
     </div>
   );

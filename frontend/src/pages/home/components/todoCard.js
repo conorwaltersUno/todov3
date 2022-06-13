@@ -42,7 +42,7 @@ const TodoCard = ({ todo }) => {
         onMouseLeave={() => setShowDelete(false)}
       >
         <CardContent
-          style={{ backgroundColor: showDelete ? "#FFF" : "#9fafca" }}
+          style={{ backgroundColor: showDelete ? "#DABECA" : "#E3D8F1" }}
         >
           <div style={{ display: "flex", justifyContent: "end" }}>
             {showDelete && (
