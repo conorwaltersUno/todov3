@@ -49,8 +49,8 @@ const Home = () => {
                 </div>
               </IconButton>
             </div>
-            {data.todos.map((todo) => (
-              <TodoBacklog todo={todo} />
+            {data.todos.map((todo, index) => (
+              <TodoBacklog key={index} todo={todo} />
             ))}
           </Item>
         </Grid>
@@ -59,8 +59,8 @@ const Home = () => {
             <div style={{ marginTop: "26px", marginBottom: "29px" }}>
               In Progress
             </div>
-            {data.todos.map((todo) => (
-              <TodoInProgress todo={todo} />
+            {data.todos.map((todo, index) => (
+              <TodoInProgress key={index} todo={todo} />
             ))}
           </Item>
         </Grid>
@@ -69,8 +69,8 @@ const Home = () => {
             <div style={{ marginTop: "26px", marginBottom: "29px" }}>
               Completed
             </div>
-            {data.todos.map((todo) => (
-              <TodoComplete todo={todo} />
+            {data.todos.map((todo, index) => (
+              <TodoComplete key={index} todo={todo} />
             ))}
           </Item>
         </Grid>

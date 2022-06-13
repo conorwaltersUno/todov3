@@ -3,6 +3,7 @@ import { TextField } from "@material-ui/core";
 import { LoadingButton } from "@mui/lab";
 import { useMutation, useQueryClient } from "react-query";
 import instance from "../../../utils/axios";
+import { successMessage } from "../../../utils/messages";
 
 const AddTask = ({ todoId }) => {
   const initialState = {
@@ -40,8 +41,8 @@ const AddTask = ({ todoId }) => {
         onSuccess: () => {
           queryClient.invalidateQueries("todoData");
           queryClient.refetchQueries("todoData");
-          setisLoading(true);
-          alert("Successfully added todo");
+          setisLoading(false);
+          successMessage("Successfully added todo");
         },
       },
       {
