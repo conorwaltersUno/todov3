@@ -42,40 +42,46 @@ const Home = () => {
         <Grid item xs={12} sm={4} md={4}>
           <Item>
             <div className="backlog-title-container">
-              <div>Backlog</div>
+              <h3>Backlog</h3>
               <IconButton
                 color="primary"
                 onClick={handleOpen}
                 aria-label="upload picture"
                 component="span"
               >
-                <div style={{ marginTop: "8px" }}>
+                <div style={{ marginTop: "21px" }}>
                   <AddIcon />
                 </div>
               </IconButton>
             </div>
             {data.todos.map((todo, index) => (
-              <TodoBacklog key={index} todo={todo} />
+              <div style={{ display: "flex", flexFlow: "column" }}>
+                <TodoBacklog key={index} todo={todo} />
+              </div>
             ))}
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Item>
-            <div style={{ marginTop: "26px", marginBottom: "29px" }}>
+            <h3 style={{ marginTop: "26px", marginBottom: "29px" }}>
               In Progress
-            </div>
+            </h3>
             {data.todos.map((todo, index) => (
-              <TodoInProgress key={index} todo={todo} />
+              <div style={{ display: "flex", flexFlow: "column" }}>
+                <TodoInProgress key={index} todo={todo} />
+              </div>
             ))}
           </Item>
         </Grid>
         <Grid item xs={12} sm={4} md={4}>
           <Item style={{ marginRight: "12px" }}>
-            <div style={{ marginTop: "26px", marginBottom: "29px" }}>
+            <h3 style={{ marginTop: "26px", marginBottom: "29px" }}>
               Completed
-            </div>
+            </h3>
             {data.todos.map((todo, index) => (
-              <TodoComplete key={index} todo={todo} />
+              <div style={{ display: "flex", flexFlow: "column" }}>
+                <TodoComplete key={index} todo={todo} />
+              </div>
             ))}
           </Item>
         </Grid>
