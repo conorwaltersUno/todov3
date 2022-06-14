@@ -38,7 +38,7 @@ const getTodosService = async () => {
 };
 
 const getTodoByIdService = async (id) => {
-  return await prisma.todo.findMany({
+  return await prisma.todo.findUnique({
     where: {
       id: parseInt(id),
     },
