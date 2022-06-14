@@ -21,7 +21,7 @@ const getAllTodos = async (req, res) => {
 const getTodoByID = async (req, res) => {
   const todo = await getTodoByIdService(req.params.id);
   if (!todo || todo.length === 0) return res.sendStatus(204);
-  res.status(okStatus).json({ todo });
+  res.status(okStatus).json(todo);
 };
 
 const postTodo = async (req, res) => {

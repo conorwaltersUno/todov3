@@ -55,7 +55,7 @@ const Home = () => {
               </IconButton>
             </div>
             {data.todos.map((todo, index) => (
-              <div style={{ display: "flex", flexFlow: "column" }}>
+              <div key={index} style={{ display: "flex", flexFlow: "column" }}>
                 <TodoBacklog key={index} todo={todo} />
               </div>
             ))}
@@ -67,7 +67,7 @@ const Home = () => {
               In Progress
             </h3>
             {data.todos.map((todo, index) => (
-              <div style={{ display: "flex", flexFlow: "column" }}>
+              <div key={index} style={{ display: "flex", flexFlow: "column" }}>
                 <TodoInProgress key={index} todo={todo} />
               </div>
             ))}
@@ -79,7 +79,7 @@ const Home = () => {
               Completed
             </h3>
             {data.todos.map((todo, index) => (
-              <div style={{ display: "flex", flexFlow: "column" }}>
+              <div key={index} style={{ display: "flex", flexFlow: "column" }}>
                 <TodoComplete key={index} todo={todo} />
               </div>
             ))}

@@ -1,15 +1,17 @@
 import { Modal, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import AddTask from "./addTask";
-import TaskDisplay from "./taskDisplay";
 import Fade from "@mui/material/Fade";
 
 const TodoModal = ({
   open,
-  handleClose,
-  todo: { id, header, description, todotask },
+  setOpen,
+  todo: { id, description, header, todotask },
 }) => {
+  const [todoTaskState, setTodotask] = useState(todotask);
+  const handleClose = () => setOpen(false);
+
   const style = {
     position: "absolute",
     top: "20%",
@@ -22,6 +24,7 @@ const TodoModal = ({
     boxShadow: 24,
     p: 4,
   };
+
   return (
     <div>
       <Modal
@@ -32,14 +35,35 @@ const TodoModal = ({
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {id}.{header}
-            </Typography>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+            ></Typography>
+            {id}. {header}
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               {description}
             </Typography>
-            <AddTask todoId={id}></AddTask>
-            <TaskDisplay tasks={todotask}></TaskDisplay>
+            <AddTask
+              todoId={id}
+              setOpen={setOpen}
+              tasks={todoTaskState}
+              setTodotask={setTodotask}
+            ></AddTask>
+            {todoTaskState.map((task, index) => {
+              return (
+                <div key={index}>
+                  <div className="task-single-container">
+                    {task.task.id}.{task.task.description}
+                    {task.task.completed ? (
+                      <div>Completed</div>
+                    ) : (
+                      <div>Not completed</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
           </Box>
         </Fade>
       </Modal>

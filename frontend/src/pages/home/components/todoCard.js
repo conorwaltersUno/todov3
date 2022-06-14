@@ -9,7 +9,6 @@ const TodoCard = ({ todo }) => {
   const [open, setOpen] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const queryClient = useQueryClient();
 
   const mutation = useMutation(() => {
@@ -72,7 +71,6 @@ const TodoCard = ({ todo }) => {
         open={open}
         setOpen={setOpen}
         todo={todo}
-        handleClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       ></TodoModal>
