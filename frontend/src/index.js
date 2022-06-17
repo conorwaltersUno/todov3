@@ -16,7 +16,7 @@ ReactDOM.render(
           initialIsOpen={false}
           panelProps={{
             style: {
-              height: "400px",
+              height: "200px",
             },
           }}
         />

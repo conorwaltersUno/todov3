@@ -67,13 +67,16 @@ const TodoCard = ({ todo }) => {
           </div>
         </CardContent>
       </Card>
-      <TodoModal
-        open={open}
-        setOpen={setOpen}
-        todo={todo}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      ></TodoModal>
+      {open && (
+        <TodoModal
+          open={open}
+          setOpen={setOpen}
+          handleOpen={handleOpen}
+          todo={todo}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        ></TodoModal>
+      )}
     </div>
   );
 };

@@ -7,11 +7,10 @@ const okStatus = 200;
 const serverErrorStatus = 500;
 
 const postTask = async (req, res) => {
-  const newTask = await saveTaskService(req);
-  if (!newTask || newTask.length === 0)
-    return res.sendStatus(serverErrorStatus);
+  const task = await saveTaskService(req);
+  if (!task || task.length === 0) return res.sendStatus(serverErrorStatus);
   res.status(okStatus).json({
-    newTask,
+    task,
   });
 };
 

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
 import { LoadingButton } from "@mui/lab";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import instance from "../../../utils/axios";
-import { successMessage } from "../../../utils/messages";
+import baseUrl from "../../../utils/baseUrl";
 
-const AddTask = ({ todoId }) => {
+const AddTask = ({ todoId, todoTask, setTodoTask }) => {
   const initialState = {
     description: "",
   };
   const [formState, setFormState] = useState(initialState);
   const [isLoading, setisLoading] = useState(false);
   const resetFormState = () => setFormState({ ...initialState });
-  const queryClient = useQueryClient();
   const onChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -32,26 +31,13 @@ const AddTask = ({ todoId }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setisLoading(true);
-    mutation.mutate(
-      {
-        description: formState.description,
-        completed: false,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries("todoData");
-          queryClient.refetchQueries("todoData");
-          setisLoading(false);
-          successMessage("Successfully added todo");
-        },
-      },
-      {
-        isError: () => {
-          setisLoading(false);
-          alert(mutation.error);
-        },
-      }
-    );
+    const newTask = await instance.post(baseUrl + `/task/${todoId}`, {
+      description: formState.description,
+      completed: false,
+    });
+    todoTask.push(newTask.data);
+    console.log(todoTask);
+    setisLoading(false);
     resetFormState();
   };
 
@@ -73,9 +59,6 @@ const AddTask = ({ todoId }) => {
           onChange={onChange}
           value={formState.description}
         />
-        {mutation.error && (
-          <h5 onClick={() => mutation.reset()}>{mutation.error}</h5>
-        )}
 
         <LoadingButton
           style={{ marginTop: "25px" }}
@@ -86,6 +69,24 @@ const AddTask = ({ todoId }) => {
         >
           Save
         </LoadingButton>
+        {todoTask.length > 0 ? (
+          todoTask.map((task, index) => {
+            return (
+              <div key={index}>
+                <div className="task-single-container">
+                  {task.task.id}.{task.task.description}
+                  {task.task.completed ? (
+                    <div>Completed</div>
+                  ) : (
+                    <div>Not completed</div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div>No tasks's for this todo </div>
+        )}
       </div>
     </form>
   );

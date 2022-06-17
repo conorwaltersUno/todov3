@@ -1,16 +1,23 @@
 import { Modal, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddTask from "./addTask";
 import Fade from "@mui/material/Fade";
+import instance from "../../../utils/axios";
+import baseUrl from "../../../utils/baseUrl";
+import Loading from "../../../components/loading";
 
-const TodoModal = ({
-  open,
-  setOpen,
-  todo: { id, description, header, todotask },
-}) => {
-  const [todoTaskState, setTodotask] = useState(todotask);
+const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
   const handleClose = () => setOpen(false);
+  const [todo, settodo] = useState({});
+  const [todoTask, setTodoTask] = useState([]);
+
+  useEffect(async () => {
+    const data = await instance.get(baseUrl + `/todo/${id}`);
+    console.log(data.data);
+    settodo(data.data);
+    setTodoTask(data.data.todotask);
+  }, []);
 
   const style = {
     position: "absolute",
@@ -35,35 +42,31 @@ const TodoModal = ({
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-            ></Typography>
-            {id}. {header}
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {description}
-            </Typography>
+            {todo.id && todo.header ? (
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                {todo.id}. {todo.header}
+              </Typography>
+            ) : (
+              <div>
+                <Loading></Loading>
+              </div>
+            )}
+            {todo.description ? (
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                {todo.description}
+              </Typography>
+            ) : (
+              <div>
+                <Loading></Loading>
+              </div>
+            )}
+
             <AddTask
               todoId={id}
-              setOpen={setOpen}
-              tasks={todoTaskState}
-              setTodotask={setTodotask}
+              handleOpen={handleOpen}
+              todoTask={todoTask}
+              setTodoTask={setTodoTask}
             ></AddTask>
-            {todoTaskState.map((task, index) => {
-              return (
-                <div key={index}>
-                  <div className="task-single-container">
-                    {task.task.id}.{task.task.description}
-                    {task.task.completed ? (
-                      <div>Completed</div>
-                    ) : (
-                      <div>Not completed</div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
           </Box>
         </Fade>
       </Modal>
