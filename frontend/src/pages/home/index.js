@@ -49,7 +49,7 @@ const Home = () => {
                 aria-label="upload picture"
                 component="span"
               >
-                <div style={{ marginTop: "21px" }}>
+                <div style={{ marginTop: "10px" }}>
                   <AddIcon />
                 </div>
               </IconButton>

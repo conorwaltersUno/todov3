@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import instance from "../../../utils/axios";
 import baseUrl from "../../../utils/baseUrl";
 
-const AddTask = ({ todoId, todoTask, setTodoTask }) => {
+const AddTask = ({ todoId, todoTask }) => {
   const initialState = {
     description: "",
   };
