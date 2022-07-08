@@ -1,5 +1,5 @@
 import { Card, Typography, CardContent, Button } from "@material-ui/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import TodoModal from "./todoModal";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMutation, useQueryClient } from "react-query";

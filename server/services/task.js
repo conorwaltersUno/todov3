@@ -1,12 +1,13 @@
 const prisma = require("../utils/primsa");
 
 const saveTaskService = async (req) => {
-  const { description, completed } = req.body;
+  const { description, completed, inprogress } = req.body;
   const todoid = req.params.id;
   const newTask = await prisma.task.create({
     data: {
       description: description,
       completed: completed,
+      inprogress: inprogress,
     },
   });
   await prisma.todotask.create({
@@ -19,7 +20,7 @@ const saveTaskService = async (req) => {
 };
 
 const updateTaskService = async (req) => {
-  const { description, completed } = req.body;
+  const { description, completed, inprogress } = req.body;
   const updatedId = parseInt(req.params.id);
   const updatedTask = await prisma.task.update({
     where: {
@@ -28,6 +29,7 @@ const updateTaskService = async (req) => {
     data: {
       description: description,
       completed: completed,
+      inprogress: inprogress,
     },
   });
   return updatedTask;

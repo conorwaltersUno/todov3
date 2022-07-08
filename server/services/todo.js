@@ -10,6 +10,7 @@ const getTodosService = async () => {
               id: true,
               description: true,
               completed: true,
+              inprogress: true,
             },
           },
         },
@@ -19,15 +20,22 @@ const getTodosService = async () => {
   todos.map((todo) => {
     let todoLength = todo.todotask.length;
     let todoCompleted = 0;
+    let anyTaskInProgress = false;
     let status = "";
     todo.todotask.map((tdt) => {
       if (tdt.task.completed) {
         todoCompleted++;
       }
+      if (tdt.task.inprogress) {
+        anyTaskInProgress = true;
+      }
     });
-    if (todoCompleted === todoLength && todoLength > 0) {
+    if (todoCompleted === todoLength && todoLength > 0 && !anyTaskInProgress) {
       status = "Complete";
-    } else if (todoCompleted != todoLength && todoCompleted > 0) {
+    } else if (
+      (todoCompleted != todoLength && todoCompleted > 0) ||
+      anyTaskInProgress
+    ) {
       status = "In Progress";
     } else {
       status = "Backlog";
@@ -50,6 +58,7 @@ const getTodoByIdService = async (id) => {
               id: true,
               description: true,
               completed: true,
+              inprogress: true,
             },
           },
         },

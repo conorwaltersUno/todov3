@@ -1,7 +1,7 @@
 import { Modal, TextField } from "@material-ui/core";
 import { LoadingButton } from "@mui/lab";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useQueryClient } from "react-query";
 import { postTodo } from "../../../connectors/todo";
 import Fade from "@mui/material/Fade";

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles, Paper, styled, TextField } from "@material-ui/core";
+import {
+  Checkbox,
+  makeStyles,
+  Paper,
+  styled,
+  TextField,
+} from "@material-ui/core";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { LoadingButton } from "@mui/lab";
 import instance from "../../../utils/axios";
 import baseUrl from "../../../utils/baseUrl";
@@ -10,6 +17,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 
 const AddTask = ({ todoId, todoTask }) => {
   const initialState = {
+    inprogress: false,
     description: "",
   };
   const [formState, setFormState] = useState(initialState);
@@ -19,13 +27,6 @@ const AddTask = ({ todoId, todoTask }) => {
   const toggleAcordion = () => {
     setExpand((prev) => !prev);
   };
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: "#E3D8F1",
-
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-  }));
 
   const useStyles = makeStyles((theme) => ({
     MuiAccordionroot: {
@@ -48,15 +49,23 @@ const AddTask = ({ todoId, todoTask }) => {
     setFormState(newFormState);
   };
 
+  const handleChangeCheckbox = (event) => {
+    const newFormState = {
+      ...formState,
+      inprogress: event.target.checked,
+    };
+    setFormState(newFormState);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setisLoading(true);
     const newTask = await instance.post(baseUrl + `/task/${todoId}`, {
       description: formState.description,
+      inprogress: formState.inprogress,
       completed: false,
     });
     todoTask.push(newTask.data);
-    console.log(todoTask);
     setisLoading(false);
     resetFormState();
   };
@@ -103,7 +112,7 @@ const AddTask = ({ todoId, todoTask }) => {
                 label="Description"
                 type="text"
                 inputProps={{
-                  minLength: 100,
+                  minLength: 5,
                   maxLength: 300,
                 }}
                 sx={{ mt: 1 }}
@@ -112,6 +121,15 @@ const AddTask = ({ todoId, todoTask }) => {
                 onChange={onChange}
                 value={formState.description}
               ></TextField>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={handleChangeCheckbox}
+                    value={formState.inprogress}
+                  />
+                }
+                label="In progress?"
+              />
               <LoadingButton
                 style={{ marginTop: "11px" }}
                 variant="outlined"
@@ -135,6 +153,11 @@ const AddTask = ({ todoId, todoTask }) => {
                     <div>Completed</div>
                   ) : (
                     <div>Not completed</div>
+                  )}
+                  {task.task.inprogress ? (
+                    <div>In Progress</div>
+                  ) : (
+                    <div>Not In Progress</div>
                   )}
                 </div>
               </div>

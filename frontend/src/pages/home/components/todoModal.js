@@ -1,20 +1,25 @@
 import { Modal, Paper, styled, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AddTask from "./addTask";
 import Fade from "@mui/material/Fade";
 import instance from "../../../utils/axios";
 import baseUrl from "../../../utils/baseUrl";
 import Loading from "../../../components/loading";
+import { useQueryClient } from "react-query";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
-  const handleClose = () => setOpen(false);
+  const queryClient = useQueryClient();
+
+  const handleClose = () => {
+    setOpen(false);
+    queryClient.refetchQueries("todoData");
+  };
   const [todo, settodo] = useState({});
   const [todoTask, setTodoTask] = useState([]);
 
   useEffect(async () => {
     const data = await instance.get(baseUrl + `/todo/${id}`);
-    console.log(data.data);
     settodo(data.data);
     setTodoTask(data.data.todotask);
   }, []);

@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS public.Task(
     id          serial
             primary key,
     description  VARCHAR(255) NOT NULL,
-    completed    boolean NOT NULL
+    completed    boolean NOT NULL,
+    inProgress   boolean NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.TodoTask(

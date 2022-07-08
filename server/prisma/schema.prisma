@@ -26,6 +26,7 @@ model task {
   id          Int        @id @default(autoincrement())
   description String     @db.VarChar(255)
   completed   Boolean
+  inprogress  Boolean
   todotask    todotask[]
 }
 

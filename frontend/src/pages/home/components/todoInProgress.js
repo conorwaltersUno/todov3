@@ -1,4 +1,3 @@
-import React from "react";
 import Boop from "../../../utils/boop";
 import TodoCard from "./todoCard";
 

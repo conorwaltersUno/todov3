@@ -1,4 +1,3 @@
-import React from "react";
 import TodoCard from "./todoCard";
 import Boop from "../../../utils/boop";
 const TodoBacklog = ({ todo }) => {

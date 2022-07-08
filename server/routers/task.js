@@ -14,11 +14,15 @@ router.route("/:id").post(
       .exists()
       .notEmpty()
       .isString()
-      .withMessage("header field cannot be null"),
+      .withMessage("description field cannot be null"),
     body("completed")
       .exists()
       .notEmpty()
-      .withMessage("description field cannot be null"),
+      .withMessage("completed field cannot be null"),
+    body("inprogress")
+      .exists()
+      .notEmpty()
+      .withMessage("inprogress field cannot be null"),
   ],
   (req, res, next) => {
     validator(req, res, next);
@@ -48,6 +52,10 @@ router.route("/:id").put(
       .exists()
       .notEmpty()
       .withMessage("completed field cannot be null"),
+    body("inprogress")
+      .exists()
+      .notEmpty()
+      .withMessage("inprogress field cannot be null"),
   ],
   (req, res, next) => {
     validator(req, res, next);
