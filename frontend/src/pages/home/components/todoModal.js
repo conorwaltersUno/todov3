@@ -1,4 +1,4 @@
-import { Modal, Typography } from "@material-ui/core";
+import { Modal, Paper, styled, Typography } from "@material-ui/core";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import AddTask from "./addTask";
@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import instance from "../../../utils/axios";
 import baseUrl from "../../../utils/baseUrl";
 import Loading from "../../../components/loading";
-
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
   const handleClose = () => setOpen(false);
   const [todo, settodo] = useState({});
@@ -18,6 +18,13 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
     settodo(data.data);
     setTodoTask(data.data.todotask);
   }, []);
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#E3D8F1",
+    minHeight: "100px",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+  }));
 
   const style = {
     position: "absolute",
@@ -43,8 +50,8 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
         <Fade in={open}>
           <Box sx={style}>
             {todo.id && todo.header ? (
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                {todo.id}. {todo.header}
+              <Typography id="modal-modal-title" variant="h4" component="h2">
+                {todo.header}
               </Typography>
             ) : (
               <div>
@@ -53,7 +60,21 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
             )}
             {todo.description ? (
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                {todo.description}
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  style={{
+                    marginTop: "20px",
+                    marginRight: "3px",
+                    display: "flex",
+                    flexflow: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <DescriptionOutlinedIcon></DescriptionOutlinedIcon>
+                  Description
+                </Typography>
+                <Item>{todo.description}</Item>
               </Typography>
             ) : (
               <div>

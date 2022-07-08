@@ -20,7 +20,7 @@ const Home = () => {
   );
 
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: "#AD8A64",
+    backgroundColor: "#966677",
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: "center",
@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div
       style={{
-        backgroundColor: "#BF8B85",
+        backgroundColor: "#d198a6",
         minHeight: "100vh",
         position: "inherit",
       }}
