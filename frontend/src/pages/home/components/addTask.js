@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Checkbox,
-  makeStyles,
-  Paper,
-  styled,
-  TextField,
-} from "@material-ui/core";
+import { Checkbox, makeStyles, TextField } from "@material-ui/core";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { LoadingButton } from "@mui/lab";
 import instance from "../../../utils/axios";
@@ -28,7 +22,7 @@ const AddTask = ({ todoId, todoTask }) => {
     setExpand((prev) => !prev);
   };
 
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles(() => ({
     MuiAccordionroot: {
       "&.MuiAccordion-root:before": {
         height: "0px",
