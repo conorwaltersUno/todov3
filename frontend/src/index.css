@@ -50,3 +50,8 @@ code {
   display: flex;
   flex-flow: column;
 }
+
+.task-container {
+  overflow: scroll;
+  max-height: 300px;
+}

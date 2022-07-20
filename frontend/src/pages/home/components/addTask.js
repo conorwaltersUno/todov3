@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Checkbox, makeStyles, TextField } from "@material-ui/core";
+import {
+  Checkbox,
+  makeStyles,
+  MenuItem,
+  Select,
+  TextField,
+} from "@material-ui/core";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { LoadingButton } from "@mui/lab";
 import instance from "../../../utils/axios";
@@ -136,30 +142,31 @@ const AddTask = ({ todoId, todoTask }) => {
             </div>
           </AccordionDetails>
         </Accordion>
-
-        {todoTask.length > 0 ? (
-          todoTask.map((task, index) => {
-            return (
-              <div key={index}>
-                <div className="task-single-container">
-                  {task.task.id}.{task.task.description}
-                  {task.task.completed ? (
-                    <div>Completed</div>
-                  ) : (
-                    <div>Not completed</div>
-                  )}
-                  {task.task.inprogress ? (
-                    <div>In Progress</div>
-                  ) : (
-                    <div>Not In Progress</div>
-                  )}
+        <div className="task-container">
+          {todoTask.length > 0 ? (
+            todoTask.map((task, index) => {
+              return (
+                <div key={index}>
+                  <div className="task-single-container">
+                    {task.task.description}
+                    {task.task.completed ? (
+                      <div>Completed</div>
+                    ) : (
+                      <div>Not completed</div>
+                    )}
+                    {task.task.inprogress ? (
+                      <div>In Progress</div>
+                    ) : (
+                      <div>Not In Progress</div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        ) : (
-          <div>No tasks's for this todo </div>
-        )}
+              );
+            })
+          ) : (
+            <div>No tasks's for this todo </div>
+          )}
+        </div>
       </div>
     </form>
   );

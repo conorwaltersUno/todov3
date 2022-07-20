@@ -36,7 +36,7 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    marginTop: "140px",
+    marginTop: "15%",
     width: "70%",
     bgcolor: "#fff",
     border: "2px solid #000",
