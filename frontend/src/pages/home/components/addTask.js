@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import {
   Checkbox,
+  FormControl,
+  InputLabel,
   makeStyles,
   MenuItem,
+  Paper,
   Select,
+  styled,
   TextField,
 } from "@material-ui/core";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -14,6 +18,9 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
+import { updateTask } from "../../../connectors/task";
+import { useQueryClient } from "react-query";
+import { successMessage } from "../../../utils/messages";
 
 const AddTask = ({ todoId, todoTask }) => {
   const initialState = {
@@ -27,6 +34,15 @@ const AddTask = ({ todoId, todoTask }) => {
   const toggleAcordion = () => {
     setExpand((prev) => !prev);
   };
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: "#E3D8F1",
+    margin: "10px",
+    minHeight: "20px",
+    minWidth: "100%",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+  }));
 
   const useStyles = makeStyles(() => ({
     MuiAccordionroot: {
@@ -70,6 +86,20 @@ const AddTask = ({ todoId, todoTask }) => {
     resetFormState();
   };
 
+  const queryClient = useQueryClient();
+
+  const handleChangeTaskStatus = async (event, taskId, index) => {
+    setisLoading(true);
+    const { updatedTask, status } = await updateTask(
+      event.target.value,
+      taskId
+    );
+    setisLoading(false);
+    if (status == 200) {
+      queryClient.refetchQueries("todoData");
+    }
+  };
+
   return (
     <form onSubmit={onSubmit}>
       <div className="add-modal-container">
@@ -85,7 +115,6 @@ const AddTask = ({ todoId, todoTask }) => {
         <Accordion
           expanded={expand}
           elevation={1}
-          disableGutters={false}
           style={{
             width: "100%",
             marginTop: "25px",
@@ -145,20 +174,36 @@ const AddTask = ({ todoId, todoTask }) => {
         <div className="task-container">
           {todoTask.length > 0 ? (
             todoTask.map((task, index) => {
+              const taskId = task.task.id;
+              const taskStatus = task.task.inprogress
+                ? "inprogress"
+                : task.task.completed
+                ? "completed"
+                : "not started";
               return (
                 <div key={index}>
                   <div className="task-single-container">
-                    {task.task.description}
-                    {task.task.completed ? (
-                      <div>Completed</div>
-                    ) : (
-                      <div>Not completed</div>
-                    )}
-                    {task.task.inprogress ? (
-                      <div>In Progress</div>
-                    ) : (
-                      <div>Not In Progress</div>
-                    )}
+                    <Item>
+                      {task.task.description}
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Status
+                        </InputLabel>
+                        <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          value={taskStatus}
+                          label="Status"
+                          onChange={(event) =>
+                            handleChangeTaskStatus(event, taskId, index)
+                          }
+                        >
+                          <MenuItem value={"not started"}>Not Started</MenuItem>
+                          <MenuItem value={"inprogress"}>In Progress</MenuItem>
+                          <MenuItem value={"completed"}>Completed</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Item>
                   </div>
                 </div>
               );

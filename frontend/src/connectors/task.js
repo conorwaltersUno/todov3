@@ -14,3 +14,47 @@ export async function postTask(description, todoId) {
     console.log(error);
   }
 }
+
+export async function updateTask(status, taskId) {
+  try {
+    if (status === "inprogress") {
+      const res = await instance.put(`http://localhost:3010/task/${taskId}`, {
+        completed: false,
+        inprogress: true,
+      });
+      if (res.status !== 200) {
+        console.log(res);
+      }
+      const status = res.status;
+      const updatedTask = res.data.updatedTask;
+      return await { status, updatedTask };
+    }
+
+    if (status === "completed") {
+      const res = await instance.put(`http://localhost:3010/task/${taskId}`, {
+        completed: true,
+        inprogress: false,
+      });
+      if (res.status !== 200) {
+        console.log(res);
+      }
+      const status = res.status;
+      const updatedTask = res.data.updatedTask;
+      return await { status, updatedTask };
+    }
+    if (status === "not started") {
+      const res = await instance.put(`http://localhost:3010/task/${taskId}`, {
+        completed: false,
+        inprogress: false,
+      });
+      if (res.status !== 200) {
+        console.log(res);
+      }
+      const status = res.status;
+      const updatedTask = res.data.updatedTask;
+      return await { status, updatedTask };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}

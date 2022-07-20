@@ -43,11 +43,6 @@ router.route("/:id").put(
       .exists()
       .isNumeric()
       .withMessage("Id parameter must be a numeric value"),
-    body("description")
-      .exists()
-      .notEmpty()
-      .isString()
-      .withMessage("description field cannot be null"),
     body("completed")
       .exists()
       .notEmpty()

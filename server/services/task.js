@@ -20,14 +20,13 @@ const saveTaskService = async (req) => {
 };
 
 const updateTaskService = async (req) => {
-  const { description, completed, inprogress } = req.body;
+  const { completed, inprogress } = req.body;
   const updatedId = parseInt(req.params.id);
   const updatedTask = await prisma.task.update({
     where: {
       id: updatedId,
     },
     data: {
-      description: description,
       completed: completed,
       inprogress: inprogress,
     },
