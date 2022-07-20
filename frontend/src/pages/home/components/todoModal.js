@@ -8,6 +8,7 @@ import baseUrl from "../../../utils/baseUrl";
 import Loading from "../../../components/loading";
 import { useQueryClient } from "react-query";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import useWindowDimensions from "../../../hooks/useWindownDimensions";
 const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
   const queryClient = useQueryClient();
 
@@ -17,6 +18,7 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
   };
   const [todo, settodo] = useState({});
   const [todoTask, setTodoTask] = useState([]);
+  const { height, width } = useWindowDimensions();
 
   useEffect(async () => {
     const data = await instance.get(baseUrl + `/todo/${id}`);
@@ -36,7 +38,8 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
     top: "20%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    marginTop: "15%",
+    marginTop:
+      width <= 600 ? "45%" : width > 600 && width < 1000 ? "30%" : "15%",
     width: "70%",
     bgcolor: "#fff",
     border: "2px solid #000",
