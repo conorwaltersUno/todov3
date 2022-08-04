@@ -12,7 +12,7 @@ const TodoCard = ({ todo }) => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(() => {
-    return instance.delete(`/todo/${todo.id}`);
+    return instance.delete(`todo/${todo.id}`);
   });
 
   const deleteTodoOnClick = async (e) => {

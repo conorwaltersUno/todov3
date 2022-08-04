@@ -76,7 +76,7 @@ const AddTask = ({ todoId, todoTask }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setisLoading(true);
-    const newTask = await instance.post(`/task/${todoId}`, {
+    const newTask = await instance.post(`task/${todoId}`, {
       description: formState.description,
       inprogress: formState.inprogress,
       completed: false,
