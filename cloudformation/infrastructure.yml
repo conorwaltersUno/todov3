@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: AWS Cloud Template to create resources required to host todo app.
+
+Parameters:
+  ApiName:
+    Type: String
+    Description: Container name of API service
+    Default: todo-api-1
+  BucketName:
+    Type: String
+    Description: Name for the S3 hosting bucket
+    Default: conor-personal-todo.com
+  DBInstance:
+    Type: String
+    Description: Name for the database instance
+    Default: tododb
+
+Resources:
+  Database:
+    Type: "AWS::RDS::DBInstance"
+    DeletionPolicy: Retain
+    Properties:
+      DBInstanceIdentifier: !Ref DBInstance
+      DBInstanceClass: db.t3.micro
+      AllocatedStorage: 20
+      PubliclyAccessible: true
+      Engine: postgres
+      EngineVersion: "13.4"
+      MasterUsername: user
+      MasterUserPassword: password
+
+  LightSailApi:
+    Type: AWS::Lightsail::Container
+    DeletionPolicy: Retain
+    Properties:
+      IsDisabled: false
+      Power: micro
+      Scale: 1
+      ServiceName: !Ref ApiName
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      BucketName: !Ref BucketName

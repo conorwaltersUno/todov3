@@ -1,0 +1,15 @@
+[
+  {
+    "ParameterKey": "ApiName",
+    "ParameterValue": "todo-app-api-dev"
+  },
+  {
+    "ParameterKey": "BucketName",
+    "ParameterValue": "todo-app-dev"
+  },
+  {
+    "ParameterKey": "DBInstance",
+    "ParameterValue": "todo-app-dev"
+  },
+  {}
+]
