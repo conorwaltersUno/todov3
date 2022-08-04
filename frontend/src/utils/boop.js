@@ -28,5 +28,4 @@ const Boop = ({ rotation = 0, timing = 150, children }) => {
     </span>
   );
 };
-
 export default Boop;
