@@ -22,7 +22,7 @@ const saveTaskService = async (req) => {
 const updateTaskService = async (req) => {
   const { completed, inprogress } = req.body;
   const updatedId = parseInt(req.params.id);
-  const updatedTask = await prisma.task.update({
+  const updatedTaskk = await prisma.task.update({
     where: {
       id: updatedId,
     },
@@ -31,7 +31,7 @@ const updateTaskService = async (req) => {
       inprogress: inprogress,
     },
   });
-  return updatedTask;
+  return updatedTaskk;
 };
 
 const deleteTaskService = async (id) => {
