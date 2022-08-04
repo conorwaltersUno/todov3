@@ -21,7 +21,7 @@ const TodoModal = ({ open, setOpen, handleOpen, todo: { id } }) => {
   const { height, width } = useWindowDimensions();
 
   useEffect(async () => {
-    const data = await instance.get(baseUrl + `/todo/${id}`);
+    const data = await instance.get(`/todo/${id}`);
     settodo(data.data);
     setTodoTask(data.data.todotask);
   }, []);
